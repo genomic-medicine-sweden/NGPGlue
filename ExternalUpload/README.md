@@ -5,3 +5,7 @@ Perl ExternalUploader.pl \
     --metadata covidMetadataTemplate.json
 
 Files will be written to the same directory where artic writes its file under UploadStage/*prefix*/[fohm,gisaid]
+
+TODO
+* read logfile from artic to automatically parse parameters
+* improve json import
