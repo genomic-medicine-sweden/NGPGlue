@@ -8,13 +8,18 @@ use File::Path qw( make_path );
 use Getopt::Long;
 
 ##perl ExternalUploader.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata covidMetadataTemplateNoBOMNGP.json --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
+#perl ExternalUploader.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata ExampleRun/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
+
+## add example with files only in git-repo!!!
+## perl ExternalUploader.pl --artic_outdir ExampleRun/covid-temp/output-ssh  --metadata ExampleRun/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory ExampleRun/covid-temp/test-artic
+
 
 my $in_dir = "";
-my $metadata_json ="";
+my $metadata_input ="";
 my $Analysis_name = "";
 my $fastqdir ="";
 ##GetOptions ('artic_outdir=s' => \$in_dir);
-GetOptions ('artic_outdir=s' => \$in_dir,'fastq_directory=s' => \$fastqdir, 'prefix=s' => \$Analysis_name,'metadata=s' => \$metadata_json);
+GetOptions ('artic_outdir=s' => \$in_dir,'fastq_directory=s' => \$fastqdir, 'prefix=s' => \$Analysis_name,'metadata=s' => \$metadata_input);
 my $out_dir = $in_dir . "/UploadStage/" . $Analysis_name . "/";
 ##GetOptions ('uploadstage=s' => \$out_dir);
 
@@ -23,9 +28,20 @@ my $out_dir = $in_dir . "/UploadStage/" . $Analysis_name . "/";
 ##GetOptions ('prefix=s' => \$Analysis_name);
 
 ##GetOptions ('metadata=s' => \$metadata_json);
-my $metadata_csv = $metadata_json;
 
+## Will change to read json directly later - now converts json to csv and reads that csv
+my $metadata_csv = "";
+if($metadata_input =~ /csv/){
+    $metadata_csv = $metadata_input;
+    print "HEJ\n";
+}else{
+    $metadata_csv = $metadata_input;
+    $metadata_csv =~ s/json/csv/;
+    system("perl json2csv.pl $metadata_input $metadata_csv")
+}
+    
 my $fasta_dir = $in_dir .  "/ncovIllumina_sequenceAnalysis_makeConsensus/";
+
 my $out_dir_fohm = $out_dir . "/fohm";
 if ( !-d $out_dir_fohm ) {
     make_path $out_dir_fohm or die "Failed to create path: $out_dir_fohm";
@@ -41,12 +57,24 @@ if ( !-d $out_dir_gisaid ) {
     make_path $out_dir_gisaid or die "Failed to create path: $out_dir_gisaid";
 }
 
+
+### ENA
+my $out_dir_ENA = $out_dir . "/ENA";
+if ( !-d $out_dir_ENA ) {
+    make_path $out_dir_ENA or die "Failed to create path: $out_dir_ENA";
+}
+## /ENA
+########
+#######
+
+
 my $SCRIPT_ROOT = dirname($0);
 
 ##my %config = read_config($SCRIPT_ROOT.'/fohm.config');
-my %Locations = read_config($SCRIPT_ROOT.'/LocationsClean.config');
-my %Adresses = read_config($SCRIPT_ROOT.'/AdressesClean.config');
-
+##my %Locations = read_config($SCRIPT_ROOT.'/LocationsClean.config');
+##my %Adresses = read_config($SCRIPT_ROOT.'/AdressesClean.config');
+my %Locations = read_config($SCRIPT_ROOT.'/CONFIG/LocationsClean.config');
+my %Adresses = read_config($SCRIPT_ROOT.'/CONFIG/AdressesClean.config');
 
 ##my %id_conversion_table = read_conversion_table($SCRIPT_ROOT.'/conversion.table');
 ##my %gisaid_ids = read_gisaid_ids($gisaid_log);
@@ -177,7 +205,7 @@ foreach my $SampleID (keys % metadata){
 			    "",
 			    "",
 			    "",
-		      ) , "\n"  ); # FIXME
+		      ) , "\n"  ); # Check all boxes
 
 
 
@@ -258,6 +286,18 @@ foreach my $SampleID (keys % metadata){
     ##taxon lineage conflict ambiguity_score scorpio_call scorpio_support scorpio_conflict version pangolin_version pangoLEARN_version pango_ver pango_version status note
 }
 close CSV;
+
+
+#####
+### ENA
+
+
+
+
+##### /ENA
+##########
+
+
 
 
 
@@ -461,6 +501,7 @@ sub read_PipelineResults {
     foreach my $entry (@tsv) {
 	##$csv{$entry->{Labbnummer}} = $entry;
         ##print $entry->{taxon} . "\n";
+	## Change to 'sample name' instead of taxon
 	my $FixedID = $entry->{taxon};
 	$FixedID =~ s/\/.*//;
 	$FixedID =~ s/Consensus_//s;
