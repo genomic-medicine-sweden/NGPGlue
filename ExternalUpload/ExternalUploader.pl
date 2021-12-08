@@ -172,7 +172,7 @@ foreach my $SampleID (keys % metadata){
     }
     close(FASTA);
 
-    print GISAID join(",", ("marten.lindqvist",
+    print GISAID join("\",\"", ("\"". "marten.lindqvist",
 
                         ## basename($fasta_fn),
 			 ##$metadata{$SampleID}{Pseudo_ID} . ".fasta",
@@ -205,7 +205,7 @@ foreach my $SampleID (keys % metadata){
 			    "",
 			    "",
 			    "",
-		      ) , "\n"  ); # Check all boxes
+		      ) , "\"\n"  ); # Check all boxes
 
 
 
