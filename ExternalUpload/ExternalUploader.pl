@@ -150,7 +150,10 @@ my $GISAID_fasta_file = $out_dir_gisaid .'/'. $GlobRegion  ."_". $GlobLab  ."_".
 open(GISAID_fasta , ">" . $GISAID_fasta_file) ;
 
 open(GISAID, ">". $GISAID_meta_file);
-print GISAID "submitter,fn,covv_virus_name,covv_type,covv_passage,covv_collection_date,covv_location,covv_add_location,covv_host,covv_gender,covv_patient_age,covv_patient_status,covv_seq_technology,covv_coverage,covv_orig_lab,covv_orig_lab_addr,covv_subm_lab,covv_subm_lab_addr,covv_subm_sample_id,covv_authors,covv_provider_sample_id,covv_specimen,covv_outbreak,covv_add_host_info,covv_last_vaccinated,covv_treatment,covv_assembly_method\n";
+##print GISAID "submitter,fn,covv_virus_name,covv_type,covv_passage,covv_collection_date,covv_location,covv_add_location,covv_host,covv_gender,covv_patient_age,covv_patient_status,covv_seq_technology,covv_coverage,covv_orig_lab,covv_orig_lab_addr,covv_subm_lab,covv_subm_lab_addr,covv_subm_sample_id,covv_authors,covv_provider_sample_id,covv_specimen,covv_outbreak,covv_add_host_info,covv_last_vaccinated,covv_treatment,covv_assembly_method\n";
+print GISAID "\"submitter\",\"fn\",\"covv_virus_name\",\"covv_type\",\"covv_passage\",\"covv_collection_date\",\"covv_location\",\"covv_add_location\",\"covv_host\",\"covv_add_host_info\",\"covv_sampling_strategy\",\"covv_gender\",\"covv_patient_age\",\"covv_patient_status\",\"covv_specimen\",\"covv_outbreak\",\"covv_last_vaccinated\",\"covv_treatment\",\"covv_seq_technology\",\"covv_assembly_method\",\"covv_coverage\",\"covv_orig_lab\",\"covv_orig_lab_addr\",\"covv_subm_lab\",\"covv_subm_lab_addr\",\"covv_subm_sample_id\",\"covv_authors\"\n";
+## submitter	fn	covv_virus_name	covv_type	covv_passage	covv_collection_date	covv_location	covv_add_location	covv_host	*covv_add_host_info	*covv_sampling_strategy	covv_gender	covv_patient_age	covv_patient_status	*covv_specimen	*covv_outbreak	*covv_last_vaccinated	*covv_treatment	covv_seq_technology	*covv_assembly_method	covv_coverage	covv_orig_lab	covv_orig_lab_addr	covv_provider_sample_id	covv_subm_lab	covv_subm_lab_addr	*covv_subm_sample_id	covv_authors	covv_comment	comment_type					
+
 
 ## "covv_specimen": "field_missing_error", "covv_outbreak": "field_missing_error", "covv_add_host_info": "field_missing_error", "covv_provider_sample_id": "field_missing_error", "covv_last_vaccinated": "field_missing_error", "covv_treatment": "field_missing_error", "covv_assembly_method": "field_missing_error"
 ##   "covv_provider_sample_id", "covv_specimen", "covv_outbreak", "covv_add_host_info", "covv_last_vaccinated", "covv_treatment", "covv_assembly_method"
@@ -175,7 +178,7 @@ foreach my $SampleID (keys % metadata){
     print GISAID join("\",\"", ("\"". "marten.lindqvist",
 
                         ## basename($fasta_fn),
-			 ##$metadata{$SampleID}{Pseudo_ID} . ".fasta",
+			## $metadata{$SampleID}{Pseudo_ID} . ".fasta",
 			    $GISAID_fasta_file,
 			"hCoV-19/Sweden/" . $Locations{ $metadata{$SampleID}{Lab_code} } . "-" .  $metadata{$SampleID}{Pseudo_ID} . "/" . substr( $metadata{$SampleID}{Collection_date} ,0, 4),
                          $metadata{$SampleID}{Type},
@@ -186,26 +189,28 @@ foreach my $SampleID (keys % metadata){
 			 "",
 			 
 			 $metadata{$SampleID}{Host},
+				"",
+				"",
 			 $metadata{$SampleID}{Patient_sex},
 			 $metadata{$SampleID}{Patient_age},
-			 $metadata{$SampleID}{Patient_status},
+				$metadata{$SampleID}{Patient_status},
+				"",
+				"",
+				"",
+				"",
 			 $metadata{$SampleID}{Sequencing_technology},
-			    "",
+				"",
+				"",
 			 $Locations{ $metadata{$SampleID}{Region_code} }, ## convert
 			 $Adresses{ $metadata{$SampleID}{Region_code} }, ## convert
 			 $Locations{ $metadata{$SampleID}{Lab_code} }, ## convert according to table  $Locations{}
 			 $Adresses{ $metadata{$SampleID}{Lab_code} }, ## convert adress   $Adresses{}
 			 
 			 $metadata{$SampleID}{Pseudo_ID},
-		         $metadata{$SampleID}{Submitter},
-			    $metadata{$SampleID}{Pseudo_ID},
-			    "",
-			    "",
-			    "",
-			    "",
-			    "",
-			    "",
-		      ) , "\"\n"  ); # Check all boxes
+		         ##$metadata{$SampleID}{Submitter},
+			 
+			    
+		      )  ) . "\",\"" . $metadata{$SampleID}{Submitter} . "\"\n"  ; # Check all boxes
 
 
 
