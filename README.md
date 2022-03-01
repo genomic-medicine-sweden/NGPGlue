@@ -40,3 +40,5 @@ This is a quick fix to avoid the concurrency issue of starting GMC-Artic on seve
 ### Limitations
 The script will currently only work for the illumina workflow. The nanopore workflow requires a different input.
 
+## json2csv.pl
+Simple json to csv conversion script
