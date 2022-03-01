@@ -7,11 +7,11 @@ use POSIX qw( strftime);
 use File::Path qw( make_path );
 use Getopt::Long;
 
-##perl artic2fohm.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata covidMetadataTemplateNoBOMNGP.json --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
-#perl artic2fohm.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata exampleData/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
+##perl artic2external.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata covidMetadataTemplateNoBOMNGP.json --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
+#perl artic2external.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata exampleData/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
 
 ## add example with files only in git-repo!!!
-## perl artic2fohm.pl --artic_outdir exampleData/covid-temp/output-ssh  --metadata exampleData/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory exampleData/covid-temp/test-artic
+## perl artic2external.pl --artic_outdir exampleData/covid-temp/output-ssh  --metadata exampleData/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory exampleData/covid-temp/test-artic
 
 
 my $in_dir = "";

@@ -3,10 +3,10 @@ Small scripts and other similar NGP solutions
 
 # Script Index
 
-## artic2fohm
+## artic2external
 
 ```
-perl artic2fohm.pl 
+perl artic2external.pl 
 --prefix "test_illumina"
 --fastq_directory .github/data/fastqs/
 --artic_outdir illumina_test --metadata covidMetadataTemplate.[json|csv]
