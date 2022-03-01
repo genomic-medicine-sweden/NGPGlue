@@ -8,10 +8,10 @@ use File::Path qw( make_path );
 use Getopt::Long;
 
 ##perl artic2fohm.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata covidMetadataTemplateNoBOMNGP.json --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
-#perl artic2fohm.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata ExampleRun/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
+#perl artic2fohm.pl --artic_outdir /gms-storage-gu/gothenburg/covid-temp/output-ssh  --metadata exampleData/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory /gms-storage-gu/gothenburg/covid-temp/test-artic
 
 ## add example with files only in git-repo!!!
-## perl artic2fohm.pl --artic_outdir ExampleRun/covid-temp/output-ssh  --metadata ExampleRun/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory ExampleRun/covid-temp/test-artic
+## perl artic2fohm.pl --artic_outdir exampleData/covid-temp/output-ssh  --metadata exampleData/covidMetadataTemplateNoBOMNGP.csv --prefix TEST-SSH --fastq_directory exampleData/covid-temp/test-artic
 
 
 my $in_dir = "";
@@ -37,7 +37,7 @@ if($metadata_input =~ /csv/){
 }else{
     $metadata_csv = $metadata_input;
     $metadata_csv =~ s/json/csv/;
-    system("perl json2csv.pl $metadata_input $metadata_csv")
+    system("perl ./../json2csv.pl $metadata_input $metadata_csv")
 }
     
 my $fasta_dir = $in_dir .  "/ncovIllumina_sequenceAnalysis_makeConsensus/";
@@ -73,8 +73,8 @@ my $SCRIPT_ROOT = dirname($0);
 ##my %config = read_config($SCRIPT_ROOT.'/fohm.config');
 ##my %Locations = read_config($SCRIPT_ROOT.'/LocationsClean.config');
 ##my %Adresses = read_config($SCRIPT_ROOT.'/AdressesClean.config');
-my %Locations = read_config($SCRIPT_ROOT.'/CONFIG/LocationsClean.config');
-my %Adresses = read_config($SCRIPT_ROOT.'/CONFIG/AdressesClean.config');
+my %Locations = read_config($SCRIPT_ROOT.'/config/LocationsClean.config');
+my %Adresses = read_config($SCRIPT_ROOT.'/config/AdressesClean.config');
 
 ##my %id_conversion_table = read_conversion_table($SCRIPT_ROOT.'/conversion.table');
 ##my %gisaid_ids = read_gisaid_ids($gisaid_log);
