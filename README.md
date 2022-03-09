@@ -19,7 +19,7 @@ perl artic2external.pl
 
 * Output is written to same output folder as gms-artic, e.g. `{artic_outdir}/UploadStage/{prefix}/[fohm,gisaid]`
 
-* Metadata format is defined by the template at: https://kise.sharepoint.com/❌/r/teams/GRP_GenomicMedicineSweden/Delade%20dokument/AU%20Mikrobiologi/Bioinformatik/Pipeline%20SARS-CoV-2/covidMetadataTemplate.csv?d=we199e2b9e0bc4a068dbd56e989a4d90b&csf=1&web=1&e=gHdedC 
+* Metadata format is defined by the template at: ` https://kise.sharepoint.com/teams/GRP_GenomicMedicineSweden/Delade%20dokument/AU%20Mikrobiologi/Bioinformatik/Pipeline%20SARS-CoV-2/covidMetadataTemplate.csv?d=we199e2b9e0bc4a068dbd56e989a4d90b&csf=1&web=1&e=gHdedC `
 
 * Output is written to same output folder as gms-artic, e.g. `{artic_outdir}/UploadStage/{prefix}/[fohm,gisaid]`
 
