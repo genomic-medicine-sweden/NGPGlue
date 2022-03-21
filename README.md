@@ -13,7 +13,7 @@ perl artic2external.pl
 
 * Flags prefix, fastq_directory and artic_outdir should match that of GMS-Artic invocation.
 
-* Metadata can be generated using the GMS-uploader. 
+* Metadata can be generated using the [GMS-uploader](https://github.com/genomic-medicine-sweden/GMS-uploader). 
 
 * Metadata can be provided as either json or csv, determined by the file-suffix.
 
