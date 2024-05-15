@@ -1,3 +1,6 @@
+# Archive
+This repo has been archived as of 2024-05-15
+
 # NGPGlue Script Index
 Small scripts and other similar NGP solutions
 
